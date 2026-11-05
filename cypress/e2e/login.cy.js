@@ -1,6 +1,7 @@
 describe("Laravel applicatie", () => {
     it("Homepage is bereikbaar", () => {
         cy.visit("/");
-        cy.get("body").should("be.visible");
+        cy.login("10105", "thijs", "password");
+        cy.wait(20)
     });
 });

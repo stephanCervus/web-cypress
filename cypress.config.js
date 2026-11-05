@@ -12,7 +12,7 @@ module.exports = defineConfig({
     },
 
     e2e: {
-        baseUrl: process.env.CYPRESS_BASE_URL || "http://localhost:8183/solution/Profin",
+        baseUrl: process.env.CYPRESS_BASE_URL || "http://localhost",
         specPattern: "cypress/e2e/**/*.cy.js",
         supportFile: "cypress/support/e2e.js",
         viewportWidth: 1440,
