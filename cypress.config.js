@@ -1,7 +1,7 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-    projectId: "a7bq2k",
+    projectId: "bxv9cm",
 
     video: true,
     screenshotOnRunFailure: true,
@@ -12,7 +12,7 @@ module.exports = defineConfig({
     },
 
     e2e: {
-        baseUrl: process.env.CYPRESS_BASE_URL || "http://localhost:8000",
+        baseUrl: process.env.CYPRESS_BASE_URL || "http://localhost:8183/solution/Profin",
         specPattern: "cypress/e2e/**/*.cy.js",
         supportFile: "cypress/support/e2e.js",
         viewportWidth: 1440,
