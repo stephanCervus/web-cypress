@@ -1,0 +1,31 @@
+
+name: Cypress Daily Tests
+
+on:
+  # Handmatig starten via GitHub
+  workflow_dispatch:
+
+  # Iedere dag om 04:00 UTC
+  schedule:
+    - cron: '0 4 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  cypress:
+    name: Run Cypress Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Cypress Tests
+        uses: cypress-io/github-action@v7
+        with:
+          record: true
+          browser: chrome
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_BASE_URL: ${{ vars.CYPRESS_BASE_URL }}
