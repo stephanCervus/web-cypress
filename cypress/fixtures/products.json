@@ -1,0 +1,11 @@
+{
+  "webTypeI": {
+    "code": " 10000",
+    "name": "Boerenkaas Inkoop Handel",
+    "detailUrl": "/product/10000"
+  },
+  "webTypeW": {
+    "code": "2100G",
+    "detailUrl": "/product/2100G"
+  }
+}
