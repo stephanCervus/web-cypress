@@ -1,9 +1,10 @@
 // Shared Cypress commands 
-Cypress.Commands.add("login", (client, username, password) => {
-    cy.env(["client", "username", "password"], { log: false }).then((env) => {
-        client = client ?? env.client;
-        username = username ?? env.username;
-        password = password ?? env.password;
+Cypress.Commands.add("login", (gebruiker = "gebruikerEen") => {
+    cy.env([gebruiker], { log: false }).then((env) => {
+        if (!env[gebruiker]) {
+            throw new Error(`Gebruiker "${gebruiker}" niet gevonden in cypress.env.json (let op hoofdletters).`);
+        }
+        const { client, username, password } = env[gebruiker];
 
         cy.session([client, username], () => {
             cy.visit("/login");

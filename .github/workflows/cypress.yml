@@ -21,6 +21,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Maakt cypress.env.json aan (staat lokaal in .gitignore) met de testgebruikers uit de secrets.
+      # jq zorgt dat speciale tekens in wachtwoorden (zoals " of \) de JSON niet breken.
+      - name: Create cypress.env.json
+        env:
+          GEBRUIKER_EEN_CLIENT: ${{ secrets.CYPRESS_CLIENT_NUMBER }}
+          GEBRUIKER_EEN_USERNAME: ${{ secrets.CYPRESS_USERNAME }}
+          GEBRUIKER_EEN_PASSWORD: ${{ secrets.CYPRESS_PASSWORD }}
+          GEBRUIKER_TWEE_CLIENT: ${{ secrets.CYPRESS_USER2_CLIENT_NUMBER }}
+          GEBRUIKER_TWEE_USERNAME: ${{ secrets.CYPRESS_USER2_USERNAME }}
+          GEBRUIKER_TWEE_PASSWORD: ${{ secrets.CYPRESS_USER2_PASSWORD }}
+        run: |
+          jq -n '{
+            gebruikerEen: {
+              client: env.GEBRUIKER_EEN_CLIENT,
+              username: env.GEBRUIKER_EEN_USERNAME,
+              password: env.GEBRUIKER_EEN_PASSWORD
+            },
+            gebruikerTwee: {
+              client: env.GEBRUIKER_TWEE_CLIENT,
+              username: env.GEBRUIKER_TWEE_USERNAME,
+              password: env.GEBRUIKER_TWEE_PASSWORD
+            }
+          }' > cypress.env.json
+
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v7
         with:
@@ -29,6 +53,3 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_BASE_URL: ${{ vars.CYPRESS_BASE_URL }}
-          CYPRESS_client: ${{ secrets.CYPRESS_CLIENT_NUMBER }}
-          CYPRESS_username: ${{ secrets.CYPRESS_USERNAME }}
-          CYPRESS_password: ${{ secrets.CYPRESS_PASSWORD }}

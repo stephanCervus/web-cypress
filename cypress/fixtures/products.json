@@ -7,5 +7,16 @@
   "webTypeW": {
     "code": "2100G",
     "detailUrl": "/product/2100G"
+  },
+
+  "productMetKorting": {
+    "code": "10091",
+    "name": "Authentic Dutch Kosher Cheese 50% f.i.d.m. Cumin",
+    "promotion": "true"
+  },
+  "productZonderKorting": {
+    "code": "10101",
+    "name": "Boerenkaas 48+ 16kg Jong RM",
+    "promotion": "false"
   }
 }
