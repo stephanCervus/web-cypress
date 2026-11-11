@@ -18,21 +18,16 @@ describe('Publiekelijk assortiment', () => {
                 cy.contains(products.webTypeI.code).should('be.visible');
             })
 
-            it('Producten met webtype W word niet getoond', () => {
+            it('Producten met webtype W worden niet getoond', () => {
                 cy.contains(products.webTypeW.code).should('not.exist');
             })
 
             it('Klik om naar product pagina te gaan', () => {
-                cy.contains(products.webTypeI.name).should('be.visible');
-                cy.contains(products.webTypeI.name).click();
-                cy.url().should('include', products.webTypeI.detailUrl);
+                cy.openProductPagina(products.webTypeI);
             })
 
             it('Gaat naar product detail pagina webtype W', () => {
-                cy.request({
-                    url: products.webTypeW.detailUrl,
-                    failOnStatusCode: false
-                }).its('status').should('eq', 404);
+                cy.verwachtStatus(products.webTypeW.detailUrl, 404);
 
                 cy.visit(products.webTypeW.detailUrl, { failOnStatusCode: false });
                 cy.contains('Not Found').should('be.visible');

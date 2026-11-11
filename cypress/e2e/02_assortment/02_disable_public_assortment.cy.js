@@ -8,16 +8,16 @@ describe('Publiekelijk assortiment', () => {
             cy.contains('a', 'Assortiment').should('not.exist');
         })
         it('Assortiment link niet beschikbaar', () => {
-            cy.visit('/assortment')
-            cy.location('pathname').should('eq', '/login');
+            cy.visit('/assortment');
+            cy.opLoginPagina();
         })
         it('Product met webtype I product pagina wordt niet getoond', () => {
             cy.visit(products.webTypeI.detailUrl);
-            cy.location('pathname').should('eq', '/login');
+            cy.opLoginPagina();
         })
         it('Product met webtype W product pagina wordt niet getoond', () => {
             cy.visit(products.webTypeW.detailUrl);
-            cy.location('pathname').should('eq', '/login');
+            cy.opLoginPagina();
         })
     })
 })

@@ -2,12 +2,11 @@ import products from '../../fixtures/products.json';
 
 describe('Zoek functionaliteit', () => {
     beforeEach(() => {
-        cy.login();
-        cy.visit('/assortment');
+        cy.schoonAssortiment();
     })
 
     it('Zoek functionaliteit geeft product terug', () => {
-        cy.get('#assortiment__complete-toggle').click();
+        cy.compleetAssortiment(true);
 
         cy.get('.assortment-search__desktop')
             .find('input[name="search"]')
@@ -19,5 +18,5 @@ describe('Zoek functionaliteit', () => {
 
         cy.contains(products.productSearchTest.code).should('be.visible');
         cy.contains(products.webTypeI.code).should('not.exist');
-    } )
+    })
 })
