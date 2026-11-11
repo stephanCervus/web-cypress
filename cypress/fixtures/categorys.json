@@ -4,5 +4,12 @@
   },
   "subCategoryOne": {
     "name": "Boerenkaas"
+  },
+  "categoryTwo": {
+    "name": "Gesneden"
+  },
+  "subCategoryTwo": {
+    "name": "Foliekaas 45+ 48+",
+    "code": "2500"
   }
 }

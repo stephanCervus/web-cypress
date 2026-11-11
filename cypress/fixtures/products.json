@@ -23,5 +23,9 @@
   "productSearchTest": {
     "code": "Art. 10090",
     "name": "Authentic Dutch Kosher Cheese 50% f.i.d.m."
+  },
+  "productCategoryFilter": {
+    "code": "25000",
+    "name": "Foliekaas Gouda 48+ (Weidemelk)"
   }
 }
