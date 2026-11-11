@@ -1,4 +1,3 @@
-
 describe('Pagination assortiment test', () => {
     beforeEach(() => {
         cy.schoonAssortiment();
