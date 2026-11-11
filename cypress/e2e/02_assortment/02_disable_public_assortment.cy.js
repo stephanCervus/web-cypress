@@ -1,4 +1,4 @@
-import products from '../../../fixtures/products.json';
+import products from '../../fixtures/products.json';
 
 describe('Publiekelijk assortiment', () => {
     context('Setting UIT', () => {
