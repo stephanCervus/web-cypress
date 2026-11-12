@@ -1,6 +1,15 @@
 
 // ---------- Auth ----------
 
+// Vult het loginformulier in en klikt op Inloggen (zonder sessie/caching)
+Cypress.Commands.add("vulLoginIn", (client, username, password) => {
+    cy.visit("/login");
+    cy.get("#customer_number-input").type(client);
+    cy.get("#username-input").should("be.enabled").type(username);
+    cy.get("#password-input").should("be.enabled").type(password, { log: false });
+    cy.clickByText("Inloggen");
+});
+
 Cypress.Commands.add("login", (gebruiker = "gebruikerEen") => {
     cy.env([gebruiker], { log: false }).then((env) => {
         if (!env[gebruiker]) {
@@ -9,11 +18,7 @@ Cypress.Commands.add("login", (gebruiker = "gebruikerEen") => {
         const { client, username, password } = env[gebruiker];
 
         cy.session([client, username], () => {
-            cy.visit("/login");
-            cy.get("#customer_number-input").type(client);
-            cy.get("#username-input").should("be.enabled").type(username);
-            cy.get("#password-input").should("be.enabled").type(password, { log: false });
-            cy.clickByText("Inloggen");
+            cy.vulLoginIn(client, username, password);
             cy.location("pathname").should("not.eq", "/login");
         }, {
             // Sessie hergebruiken over ALLE spec-files heen. Zonder dit logt elke
