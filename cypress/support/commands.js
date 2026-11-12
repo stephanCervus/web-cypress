@@ -133,3 +133,9 @@ Cypress.Commands.add("voegAanbiedingToe", (product) => {
     cy.aanbiedingVan(product.code).find("[data-amount-increase]").click();
     cy.orderregelVan(product.name).should("be.visible");
 });
+
+// ---------- Orderstatus ----------
+Cypress.Commands.add("Orderstatus", (gebruiker) => {
+    cy.login(gebruiker);
+    cy.visit("/order/status");
+});
