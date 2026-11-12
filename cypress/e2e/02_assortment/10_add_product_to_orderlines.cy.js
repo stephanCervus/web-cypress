@@ -15,5 +15,17 @@ import products from '../../fixtures/products.json';
             cy.visit('/order');
             cy.contains('.order-lines__row', products.webTypeI.name).should('be.visible');
         })
+        it('Product zonder prijs krijgt foutmelding bij het aanmaken van orderregels', () => {
+            cy.contains(`.product-${weergave}`, products.productZonderKorting.code)
+                .as('product');
+
+            cy.get('@product').find('[data-amount-increase]').click();
+
+            cy.get('@product').find('[data-amount-error]').should('be.visible');
+
+            cy.get('@product')
+                .find(`.product-card__amount-counter`)
+                .should('have.text', '0');
+        })
     })
 })
