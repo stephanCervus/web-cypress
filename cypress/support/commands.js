@@ -101,20 +101,26 @@ Cypress.Commands.add("orderregelVan", (naam) => {
     return cy.contains("[data-order-line]", naam);
 });
 
-// Inloggen, naar /order en zorgen dat het product NIET in de order staat.
-// Eén delete-klik i.p.v. N keer min: minder requests, dus geen 429.
-Cypress.Commands.add("legeOrder", (product) => {
+// Verwijdert alle orderregels één voor één, tot er niks meer staat
+const verwijderAlleOrderregels = () => {
+    cy.get("body").then(($body) => {
+        const regels = $body.find("[data-order-line]");
+        if (!regels.length) return;
+
+        cy.wrap(regels.first()).find("[data-order-line-delete]").click();
+        cy.get("[data-order-line]").should("have.length", regels.length - 1);
+        verwijderAlleOrderregels();
+    });
+};
+
+// Inloggen, naar /order en alle orderregels leegmaken
+Cypress.Commands.add("leegAlleOrderregels", () => {
     cy.login();
     cy.visit("/order");
     cy.get(".order__sidebar").should("be.visible");
 
-    cy.get("body").then(($body) => {
-        const regel = $body.find(`[data-order-line]:contains("${product.name}")`);
-        if (regel.length) {
-            cy.wrap(regel).find("[data-order-line-delete]").click();
-            cy.orderregelVan(product.name).should("not.exist");
-        }
-    });
+    verwijderAlleOrderregels();
+    cy.get("[data-order-line]").should("not.exist");
 });
 
 // Voegt het product 1x toe via het aanbiedingenblok

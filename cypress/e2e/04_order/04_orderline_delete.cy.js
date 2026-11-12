@@ -4,7 +4,7 @@ const product = products.productMetKorting;
 
 describe('Orderregel verwijderen', () => {
     beforeEach(() => {
-        cy.legeOrder(product);
+        cy.leegAlleOrderregels();
         cy.voegAanbiedingToe(product);
     });
 

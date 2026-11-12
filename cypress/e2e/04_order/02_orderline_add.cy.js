@@ -4,7 +4,7 @@ const product = products.productMetKorting;
 
 describe('Orderregel toevoegen', () => {
     beforeEach(() => {
-        cy.legeOrder(product);
+        cy.leegAlleOrderregels();
     });
 
     it('Product uit aanbiedingenblok komt in de orderregels', () => {

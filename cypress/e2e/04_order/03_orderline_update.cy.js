@@ -5,7 +5,7 @@ const product = products.productMetKorting;
 describe('Orderregel aantal wijzigen', () => {
     beforeEach(() => {
         // Uitgangssituatie voor elke test: product staat precies 1x in de order
-        cy.legeOrder(product);
+        cy.leegAlleOrderregels();
         cy.voegAanbiedingToe(product);
     });
 
