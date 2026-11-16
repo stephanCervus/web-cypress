@@ -12,7 +12,7 @@ describe('Zoek functionaliteit', () => {
             .find('input[name="search"]')
             .type(`${products.productSearchTest.name}{enter}`);
 
-        cy.location('search').then((search) => {
+        cy.location('search').should((search) => {
             expect(new URLSearchParams(search).get('search')).to.eq(products.productSearchTest.name);
         })
 
@@ -25,7 +25,7 @@ describe('Zoek functionaliteit', () => {
             .find('input[name="search"]')
             .type('testProductDieNietBestaat{enter}');
 
-        cy.location('search').then((search) => {
+        cy.location('search').should((search) => {
             expect(new URLSearchParams(search).get('search')).to.eq('testProductDieNietBestaat');
         })
         cy.get('.assortment__empty').should('be.visible');
